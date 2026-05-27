@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -22,26 +23,30 @@ import java.util.List;
 public class test_bot extends OpMode {
    private DcMotor left_motor;
    private DcMotor right_motor;
-
+   private ElapsedTime runtime = new ElapsedTime();
     @Override
     public void init(){
 
         left_motor = hardwareMap.get(DcMotor.class, "left_motor");
         right_motor = hardwareMap.get(DcMotor.class, "right_motor");
+        runtime.reset();
 
-
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
 
 
     }
-
-
     @Override
     public void loop(){
-        left_motor.setPower(gamepad1.left_stick_y);
-        right_motor.setPower(gamepad1.right_stick_y);
+
+
+        while (runtime.seconds()<10.0){
+            left_motor.setPower(gamepad1.left_stick_y);
+            right_motor.setPower(-gamepad1.right_stick_y);
+            telemetry.addData("Number of Seconds in Phase 1", gamepad1.left_stick_y);
+            telemetry.update();
+        }
+
 
     }
-
-
-
 }

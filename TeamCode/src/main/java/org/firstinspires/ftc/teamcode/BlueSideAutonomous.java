@@ -32,14 +32,22 @@ public class BlueSideAutonomous extends OpMode {
 
 
     public void buildPaths() {
-        Path1 = follower.pathBuilder().addPath(
+
+        Path1 = follower.pathBuilder()
+                .addPath(
                         new BezierLine(
                                 new Pose(56.000, 8.000),
-
-                                new Pose(56.000, 36.000)
+                                new Pose(79.618, 15.099)
                         )
-                ).setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(90))
-
+                )
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(302))
+                .addPath(
+                        new BezierLine(
+                                new Pose(79.618, 15.099),
+                                new Pose(79.618, 15.099)
+                        )
+                )
+                .setConstantHeadingInterpolation(Math.toRadians(302))
                 .build();
     }
 
